@@ -1,5 +1,5 @@
-import 'package:checkout_payment_integration/core/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:checkout_payment_integration/core/presentation/constants/app_icons.dart';
+import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:flutter/material.dart';
 
 class NavigateBackIconWidget extends StatelessWidget {

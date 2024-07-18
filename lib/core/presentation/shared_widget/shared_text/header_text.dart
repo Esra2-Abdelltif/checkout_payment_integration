@@ -1,4 +1,4 @@
-import 'package:checkout_payment_integration/core/infrastructure/utils/functions/text_size_responsvie/text_size_responsvie.dart';
+import 'package:checkout_payment_integration/infrastructure/utils/functions/text_size_responsvie/text_size_responsvie.dart';
 import 'package:flutter/material.dart';
 
 class AppBaHeaderText extends StatelessWidget {
