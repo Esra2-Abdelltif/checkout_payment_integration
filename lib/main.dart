@@ -1,8 +1,13 @@
+import 'package:checkout_payment_integration/core/presentation/constants/app_colors.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/my_cart_view/my_cart_view.dart';
 import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
 BuildContext? mainContext;
 void main() {
-  runApp(const CheckoutApp());
+  runApp((DevicePreview(
+    enabled: true,
+    builder: (context) => const CheckoutApp(),
+  )));
 }
 
 class CheckoutApp extends StatelessWidget {
@@ -12,15 +17,18 @@ class CheckoutApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       title: 'Flutter CheckoutApp Demo',
       theme: ThemeData(
+        primaryColor: AppColors.primaryColor,
         scaffoldBackgroundColor: Colors.white,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor:AppColors.primaryColor,),
         useMaterial3: true,
 
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyCartSection(),
+      home: const MyCartViewSection(),
     );
   }
 }
