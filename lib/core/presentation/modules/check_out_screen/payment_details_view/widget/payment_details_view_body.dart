@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:checkout_payment_integration/core/presentation/constants/app_spaces.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_details_view/widget/custom_credit_card.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_details_view/widget/payment_methods_list_view.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
-import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
