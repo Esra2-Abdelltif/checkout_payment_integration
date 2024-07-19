@@ -8,7 +8,6 @@ class Assets {
   static const String imagesApplePay = 'assets/images/apple_pay.svg';
   static const String imagesBasketImage = 'assets/images/basket_image.png';
   static const String imagesCard = 'assets/images/card.svg';
-  static const String imagesCredit = 'assets/images/credit.png';
   static const String imagesMasterCard = 'assets/images/master_card.svg';
   static const String imagesPaypal = 'assets/images/paypal.svg';
 
