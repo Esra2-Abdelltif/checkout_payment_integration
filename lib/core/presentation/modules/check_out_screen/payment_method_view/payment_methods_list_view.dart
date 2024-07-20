@@ -1,5 +1,5 @@
 import 'package:checkout_payment_integration/core/presentation/constants/app_image.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_details_view/widget/payment_method_item.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_method_item.dart';
 import 'package:flutter/material.dart';
 
 class PaymentMethodsListView extends StatefulWidget {

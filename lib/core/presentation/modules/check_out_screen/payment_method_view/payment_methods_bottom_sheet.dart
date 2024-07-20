@@ -1,9 +1,9 @@
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_details_view/widget/payment_methods_list_view.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_list_view.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../payment_details_view.dart';
+import '../payment_details_view/payment_details_view.dart';
 
 class PaymentMethodsBottomSheet extends StatefulWidget {
   const PaymentMethodsBottomSheet({super.key});

@@ -1,11 +1,13 @@
 import 'package:checkout_payment_integration/core/presentation/constants/app_image.dart';
 import 'package:checkout_payment_integration/core/presentation/constants/app_spaces.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/my_cart_view/widget/order_info_item.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_details_view/widget/payment_methods_bottom_sheet.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_bottom_sheet.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/divider_widget.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/total_price_widget.dart';
+import 'package:checkout_payment_integration/infrastructure/utils/extensions/dimension_extension.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/functions/show_bottom_sheet/custom_bottom_sheet.dart';
+import 'package:checkout_payment_integration/infrastructure/utils/functions/show_dialog/show_dialog.dart';
 import 'package:flutter/material.dart';
 
 class MyCartViewBody extends StatelessWidget {
@@ -38,7 +40,12 @@ class MyCartViewBody extends StatelessWidget {
           AppSpaces.vSpace16,
           CustomButton(text: "Complete Payment",
             onTap: (){
-            showCustomBottomSheet(context,const PaymentMethodsBottomSheet());
+           context.isMobileDevice? showCustomBottomSheet(context,const PaymentMethodsBottomSheet()):
+           dialogWithBlurBackground(
+               context: context,content:SizedBox(
+             width: context.width/2,
+               child: const PaymentMethodsBottomSheet())
+           );
 
           },isLoading: false,),
         ],
