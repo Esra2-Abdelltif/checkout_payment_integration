@@ -7,9 +7,10 @@ class ThankYouView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: SharedAppBarInMobileView(title: ''),
-      body:  ThankYouViewBody(),
+    return  Scaffold(
+      appBar: const SharedAppBarInMobileView(title: ''),
+      body:  Transform.translate(
+    offset: const Offset(0, -16), child:const ThankYouViewBody()),
     );
   }
 }

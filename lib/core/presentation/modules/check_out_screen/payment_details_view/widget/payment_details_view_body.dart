@@ -45,11 +45,11 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
-                        context.pushContext(route: const ThankYouView());
+                        // context.pushContext(route: const ThankYouView());
 
                         log('payment');
                       } else {
-                        // context.pushContext(route: const ThankYouView());
+                        context.pushContext(route: const ThankYouView());
                         autovalidateMode = AutovalidateMode.always;
                         setState(() {});
                       }

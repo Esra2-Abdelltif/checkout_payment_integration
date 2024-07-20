@@ -11,8 +11,17 @@ class AppSpaces {
   static SizedBox vSpace16 =  const SizedBox(
   height: 16,
   );
+  static SizedBox vSpace20 =  const SizedBox(
+    height: 20,
+  );
+  static SizedBox vSpace30 =  const SizedBox(
+    height: 30,
+  );
   static SizedBox vSpace34 =  const SizedBox(
     height: 34,
+  );
+  static SizedBox vSpace42 =  const SizedBox(
+    height: 42,
   );
 
 }
