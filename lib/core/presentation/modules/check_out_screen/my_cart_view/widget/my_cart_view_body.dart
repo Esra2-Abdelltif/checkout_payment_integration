@@ -2,6 +2,7 @@ import 'package:checkout_payment_integration/core/presentation/constants/app_ima
 import 'package:checkout_payment_integration/core/presentation/constants/app_spaces.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/my_cart_view/widget/order_info_item.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_bottom_sheet.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/divider_widget.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/total_price_widget.dart';
@@ -9,6 +10,7 @@ import 'package:checkout_payment_integration/infrastructure/utils/extensions/dim
 import 'package:checkout_payment_integration/infrastructure/utils/functions/show_bottom_sheet/custom_bottom_sheet.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/functions/show_dialog/show_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyCartViewBody extends StatelessWidget {
   const MyCartViewBody({super.key});
@@ -40,11 +42,15 @@ class MyCartViewBody extends StatelessWidget {
           AppSpaces.vSpace16,
           CustomButton(text: "Complete Payment",
             onTap: (){
-           context.isMobileDevice? showCustomBottomSheet(context,const PaymentMethodsBottomSheet()):
+           context.isMobileDevice? showCustomBottomSheet(context,BlocProvider(
+               create: (context)=>PaymentCubit(),
+              child: const PaymentMethodsBottomSheet())):
            dialogWithBlurBackground(
                context: context,content:SizedBox(
              width: context.width/2,
-               child: const PaymentMethodsBottomSheet())
+               child: BlocProvider(
+                 create: (context)=>PaymentCubit(),
+                   child: const PaymentMethodsBottomSheet()))
            );
 
           },isLoading: false,),

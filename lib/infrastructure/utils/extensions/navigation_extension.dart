@@ -9,5 +9,11 @@ extension NavigationContext on BuildContext {
       builder: (context) => route,
     ),
   );
+  dynamic pushReplacementContext({required route}) => Navigator.pushReplacement(
+    this,
+    MaterialPageRoute(
+      builder: (context) => route,
+    ),
+  );
 
 }
