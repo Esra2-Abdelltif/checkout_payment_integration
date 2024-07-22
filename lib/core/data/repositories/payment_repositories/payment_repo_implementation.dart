@@ -26,8 +26,8 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
       ));
     } catch (e) {
       return left(ConflictException(
-          errorCode:  e.toString() ?? 'Oops there was an error',
-          errorMessage:  e.toString()?? 'Oops there was an error',
+          errorCode:  e.toString() ,
+          errorMessage:  e.toString(),
           statusCode: 409
       ));
     }
