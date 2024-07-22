@@ -2,7 +2,6 @@ import 'package:checkout_payment_integration/core/data/model/payment_model/payme
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_list_view.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/thank_you_view.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_listening_on_states.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_state.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
 import 'package:flutter/material.dart';
