@@ -19,7 +19,7 @@ class StripeService {
       token: EnvironmentVariables.setSecretKeyValue(),
     );
 
-    var paymentIntentModel = PaymentIntentModel.fromJson(response.data);
+    var paymentIntentModel = PaymentIntentModel.fromJson(response);
 
     return paymentIntentModel;
   }
@@ -64,7 +64,7 @@ class StripeService {
         token:EnvironmentVariables.setSecretKeyValue(),
        );
 
-    var ephermeralKey = EphemeralKeyModel.fromJson(response.data);
+    var ephermeralKey = EphemeralKeyModel.fromJson(response);
 
     return ephermeralKey;
   }
