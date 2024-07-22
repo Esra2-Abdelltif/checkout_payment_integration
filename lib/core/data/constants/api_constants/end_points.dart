@@ -1,4 +1,4 @@
-const String baseStripeUrlValue = "https://api.stripe.com/v1/payment_intents";
+const String baseStripeUrlValue = "https://api.stripe.com/v1";
 
 //Stripe
 const String createPaymentIntentEndPoint = '$baseStripeUrlValue/payment_intents';

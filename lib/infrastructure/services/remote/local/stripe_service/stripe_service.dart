@@ -4,22 +4,16 @@ import 'package:checkout_payment_integration/core/data/model/payment_model/init_
 import 'package:checkout_payment_integration/core/data/model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_model/payment_intent_model/payment_intent_model.dart';
 import 'package:checkout_payment_integration/infrastructure/services/remote/local/api/api_helper_implementation.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-
 import '../../../../env/environment_variables.dart';
 
 class StripeService {
-
   final ApiHelperImplementation apiService = ApiHelperImplementation();
   Future<PaymentIntentModel> createPaymentIntent(
       PaymentIntentInputModel paymentIntentInputModel) async {
     var response = await apiService.post(
       data: paymentIntentInputModel.toJson(),
-     options: Options(
-       contentType: Headers.formUrlEncodedContentType,
-       headers:  {'Authorization': "Bearer ${EnvironmentVariables.setSecretKeyValue()}"},
-     ),
+     isMultipart: true,
       endPoint:createPaymentIntentEndPoint,
       token: EnvironmentVariables.setSecretKeyValue(),
     );
@@ -63,13 +57,8 @@ class StripeService {
       {required String customerId}) async {
     var response = await apiService.post(
         data: {'customer': customerId},
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers:   {
-        'Authorization': "Bearer ${EnvironmentVariables.setSecretKeyValue}",
-        'Stripe-Version': '2024-06-20',
-        }
-        ),
+      isMultipart: true,
+      isAddStripeVersion: true,
         endPoint: ephemeralKeysEndPoint,
         token:EnvironmentVariables.setSecretKeyValue(),
        );
@@ -82,7 +71,7 @@ class StripeService {
 
 }
 
-/// just fun to makePayment
+// / just fun to makePayment
 // Future initPaymentSheet({required String paymentIntentClientSecret}) async {
 //   await Stripe.instance.initPaymentSheet(
 //     paymentSheetParameters: SetupPaymentSheetParameters(
@@ -91,7 +80,7 @@ class StripeService {
 //     ),
 //   );
 // }
-
+//
 // Future makePayment(
 //     {required PaymentIntentInputModel paymentIntentInputModel}) async {
 //   var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);

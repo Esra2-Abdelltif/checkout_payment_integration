@@ -17,6 +17,8 @@ class ApiHelperImplementation extends ApiHelper {
     String? token,
     CancelToken? cancelToken,
     bool isMultipart = false,
+
+
   }) async {
     dio.options.headers = _setHeaders(isMultipart, token);
     _debugPrintData(endPoint, data, query);
@@ -40,10 +42,10 @@ class ApiHelperImplementation extends ApiHelper {
     Function? progressCallback,
     CancelToken? cancelToken,
     bool isMultipart = false,
-    dynamic options,
+    bool isAddStripeVersion = false,
 
   }) async {
-    dio.options.headers = _setHeaders(isMultipart, token);
+    dio.options.headers = _setHeaders(isMultipart, token,isAddStripeVersion: isAddStripeVersion,);
     _debugPrintData(endPoint, data, query);
 
     return await requestData(
@@ -51,7 +53,6 @@ class ApiHelperImplementation extends ApiHelper {
         endPoint,
         data: data,
         queryParameters: query,
-        options: options,
         onSendProgress: _setProgressCallBackWhenUploadingFile(progressCallback),
       ),
     );
@@ -147,11 +148,12 @@ class ApiHelperImplementation extends ApiHelper {
     return null;
   }
 
-  _setHeaders(bool isMultipart, String? token) {
+  _setHeaders(bool isMultipart, String? token, {bool isAddStripeVersion=false}) {
     return {
-      if (isMultipart) Headers.contentTypeHeader: Headers.multipartFormDataContentType,
+      if (isMultipart) Headers.contentTypeHeader: Headers.formUrlEncodedContentType,
       if (!isMultipart) Headers.contentTypeHeader:Headers.jsonContentType,
       if (!isMultipart) Headers.acceptHeader: Headers.jsonContentType,
+      if (isAddStripeVersion)  'Stripe-Version': '2024-06-20',
       if (token != null) 'Authorization': "Bearer $token",
     };
   }

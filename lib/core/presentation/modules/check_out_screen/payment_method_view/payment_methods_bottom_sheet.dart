@@ -1,5 +1,6 @@
 import 'package:checkout_payment_integration/core/data/model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_list_view.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/thank_you_view.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_listening_on_states.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_state.dart';
@@ -31,48 +32,73 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
+    return const Padding(
+      padding: EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 16,
           ),
           PaymentMethodsListView(
             // updatePaymentMethod: updatePaymentMethod,
           ),
-          const SizedBox(
+          SizedBox(
             height: 32,
           ),
-          BlocConsumer<PaymentCubit, PaymentState>(
-            listener: (context, state) {
-              PaymentListenerOnStates.listenerOnStates(
-                state,
-                context,
-                PaymentCubit.ofCurrentContext(context),
-              );
-            },
-            builder: (context, state) {
-              return CustomButton(text: "Continue",
-                  isLoading:state is PaymentLoading?true:false,
-                  onTap: () {
-                    PaymentIntentInputModel paymentIntentInputModel =
-                    PaymentIntentInputModel(
-                      amount: '100',
-                      currency: 'USD',
-                      cusomerId: 'cus_Onu3Wcrzhehlez',
-                    );
-                    BlocProvider.of<PaymentCubit>(context).makePayment(
-                        paymentIntentInputModel: paymentIntentInputModel);
-                    // context.pushContext(route: const PaymentDetailsView());
-                  });
-            },
-          )
+          CustomButtonBlocConsumer(isPaypal: false,)
 
 
         ],
       ),
     );
   }
+}
+
+class CustomButtonBlocConsumer extends StatelessWidget {
+  const CustomButtonBlocConsumer({
+    super.key,
+    required this.isPaypal,
+  });
+
+  final bool isPaypal;
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<PaymentCubit, PaymentState>(
+      listener: (context, state) {
+        if (state is PaymentSuccess) {
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) {
+            return const ThankYouView();
+          }));
+        }
+
+        if (state is PaymentFailure) {
+          Navigator.of(context).pop();
+          SnackBar snackBar = SnackBar(content: Text(PaymentCubit.ofCurrentContext(context).serverException!.errorMessage!));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+      },
+      builder: (context, state) {
+        return CustomButton(
+            onTap: () {
+              excuteStripePayment(context);
+            },
+            isLoading: state is PaymentLoading ? true : false,
+            text: 'Continue');
+      },
+    );
+  }
+
+  void excuteStripePayment(BuildContext context) {
+    PaymentIntentInputModel paymentIntentInputModel = PaymentIntentInputModel(
+      amount: '100',
+      currency: 'USD',
+      cusomerId: 'cus_Onu3Wcrzhehlez',
+    );
+    BlocProvider.of<PaymentCubit>(context)
+        .makePayment(paymentIntentInputModel: paymentIntentInputModel);
+  }
+
+
 }

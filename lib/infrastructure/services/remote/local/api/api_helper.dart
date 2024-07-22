@@ -20,7 +20,8 @@ abstract class ApiHelper {
     Function? progressCallback,
     CancelToken? cancelToken,
     bool isMultipart = false,
-    dynamic options,
+    bool isAddStripeVersion = false,
+
 
   });
 
