@@ -4,11 +4,9 @@ import 'package:checkout_payment_integration/core/presentation/modules/manger/cu
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_listening_on_states.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_state.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
-import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../payment_details_view/payment_details_view.dart';
 
 class PaymentMethodsBottomSheet extends StatefulWidget {
   const PaymentMethodsBottomSheet({super.key});
