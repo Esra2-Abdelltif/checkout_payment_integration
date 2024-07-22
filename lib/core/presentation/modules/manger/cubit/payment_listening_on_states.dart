@@ -20,6 +20,8 @@ class PaymentListenerOnStates {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
     if (state is NoInternetConnectionState) {
+      context.popContext();
+
       SnackBar snackBar = const SnackBar(content: Text("Check your internet connection"));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }

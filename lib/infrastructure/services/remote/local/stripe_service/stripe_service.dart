@@ -1,11 +1,12 @@
 import 'package:checkout_payment_integration/core/data/constants/api_constants/end_points.dart';
-import 'package:checkout_payment_integration/core/data/model/ephemeral_key_model/ephemeral_key_model.dart';
-import 'package:checkout_payment_integration/core/data/model/payment_model/init_payment_sheet_input_model/init_payment_sheet_input_model.dart';
-import 'package:checkout_payment_integration/core/data/model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
-import 'package:checkout_payment_integration/core/data/model/payment_model/payment_intent_model/payment_intent_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/ephemeral_key_model/ephemeral_key_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/init_payment_sheet_input_model/init_payment_sheet_input_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_model/payment_intent_model.dart';
 import 'package:checkout_payment_integration/infrastructure/services/remote/local/api/api_helper_implementation.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import '../../../../env/environment_variables.dart';
+
 
 class StripeService {
   final ApiHelperImplementation apiService = ApiHelperImplementation();

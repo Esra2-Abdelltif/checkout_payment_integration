@@ -1,4 +1,4 @@
-import 'package:checkout_payment_integration/core/data/model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_list_view.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/thank_you_view.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
@@ -71,10 +71,14 @@ class CustomButtonBlocConsumer extends StatelessWidget {
             return const ThankYouView();
           }));
         }
-
         if (state is PaymentFailure) {
           Navigator.of(context).pop();
           SnackBar snackBar = SnackBar(content: Text(PaymentCubit.ofCurrentContext(context).serverException!.errorMessage!));
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        if (state is NoInternetConnectionState) {
+          Navigator.of(context).pop();
+          SnackBar snackBar = const SnackBar(content: Text("Check your internet connection"));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
@@ -91,9 +95,9 @@ class CustomButtonBlocConsumer extends StatelessWidget {
 
   void excuteStripePayment(BuildContext context) {
     PaymentIntentInputModel paymentIntentInputModel = PaymentIntentInputModel(
-      amount: '100',
+      amount: 1000,
       currency: 'USD',
-      cusomerId: 'cus_Onu3Wcrzhehlez',
+      cusomerId: '2',
     );
     BlocProvider.of<PaymentCubit>(context)
         .makePayment(paymentIntentInputModel: paymentIntentInputModel);
