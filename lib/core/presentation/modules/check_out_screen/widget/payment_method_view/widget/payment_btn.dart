@@ -46,13 +46,14 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     );
   }
 
-  void excuteStripePayment(BuildContext context,PaymentCubit paymentCubit) {
+  void excuteStripePayment(BuildContext context,PaymentCubit paymentCubit) async{
     PaymentIntentRequestModel paymentIntentInputModel = PaymentIntentRequestModel(
       amount: 50,
       currency: 'USD',
-      cusomerId: 'cus_QWBY2jpTOAo5Y6',
+      cusomerId: "cus_QWbJ0Ny3Ffm0uS",
     );
-    paymentCubit.makePayment(paymentIntentRequestModel: paymentIntentInputModel);
+    // paymentCubit.createCustomer();
+      await paymentCubit.makePayment(paymentIntentRequestModel: paymentIntentInputModel);
   }
 
 

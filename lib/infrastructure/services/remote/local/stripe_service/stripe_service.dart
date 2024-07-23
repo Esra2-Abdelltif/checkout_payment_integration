@@ -1,4 +1,6 @@
 import 'package:checkout_payment_integration/core/data/constants/api_constants/end_points.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_request_model/create_customer_request_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_response_model/create_customer_response_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/ephemeral_key_model/ephemeral_key_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/init_payment_sheet_request_model/init_payment_sheet_request_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
@@ -7,7 +9,7 @@ import 'package:checkout_payment_integration/infrastructure/services/remote/loca
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import '../../../../env/environment_variables.dart';
-
+import 'dart:developer' as dev;
 
 class StripeService {
   final ApiHelperImplementation apiService = ApiHelperImplementation();
@@ -24,19 +26,20 @@ class StripeService {
 
     return paymentIntentResponseModel;
   }
-  // Future<PaymentIntentModel> createPaymentIntent(
-  //     PaymentIntentInputModel paymentIntentInputModel) async {
-  //   var response = await apiService.post(
-  //     data: paymentIntentInputModel.toJson(),
-  //     isMultipart: true,
-  //     endPoint:createPaymentIntentEndPoint,
-  //     token: EnvironmentVariables.setSecretKeyValue(),
-  //   );
-  //
-  //   var paymentIntentModel = PaymentIntentModel.fromJson(response);
-  //
-  //   return paymentIntentModel;
-  // }
+  Future<CreateCustomersResponseModel> createCustomers({required CreateCustomerRequestModel createCustomerRequestModel}) async {
+    var response = await apiService.post(
+      data: createCustomerRequestModel.toJson(),
+      isMultipart: true,
+      endPoint:createCustomerEndPoint,
+      token: EnvironmentVariables.setSecretKeyValue(),
+    );
+    var createCustomersResponseModel =CreateCustomersResponseModel.fromJson(response);
+    dev.log(createCustomersResponseModel.id!);
+    return createCustomersResponseModel;
+
+
+
+  }
 
   Future displayPaymentSheet() async {
     await Stripe.instance.presentPaymentSheet();
