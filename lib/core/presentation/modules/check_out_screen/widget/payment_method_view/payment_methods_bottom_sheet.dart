@@ -15,7 +15,7 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
   bool isPaypal = false;
 
   updatePaymentMethod({required int index}) {
-    if (index == 0 || index == 2) {
+    if (index == 0 ) {
       isPaypal = false;
     } else {
       isPaypal = true;
@@ -26,21 +26,21 @@ class _PaymentMethodsBottomSheetState extends State<PaymentMethodsBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16),
+    return  Padding(
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          PaymentMethodsListView(
-            // updatePaymentMethod: updatePaymentMethod,
+           PaymentMethodsListView(
+            updatePaymentMethod: updatePaymentMethod,
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
-          CustomButtonBlocConsumer(isPaypal: false,)
+          CustomButtonBlocConsumer(isPaypal: isPaypal,)
 
 
         ],
