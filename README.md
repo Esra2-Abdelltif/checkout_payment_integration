@@ -23,3 +23,15 @@ To install the Flutter PayPal Payment Package, follow these steps
     ``` 
 
 ## Usage
+1. Import the package into your Dart file:
+
+    ``` 
+   import 'package:flutter_stripe/flutter_stripe.dart';
+    ```
+2. When your app starts, configure the SDK with your Stripe publishable key so that it can make requests to the Stripe API:
+    ``` 
+   void main() async {
+  Stripe.publishableKey = stripePublishableKey;
+  runApp(const App());
+}
+    ```
