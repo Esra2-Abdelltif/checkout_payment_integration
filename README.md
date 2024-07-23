@@ -41,6 +41,7 @@ To install the Flutter PayPal Payment Package, follow these steps
    Stripe uses this to represent your intent to collect payment from a customer.
    ```dart
    curl https://api.stripe.com/v1/payment_intents \
+   -X "POST"
 
     ```
 4.  Integrate the payment sheet 
@@ -60,7 +61,7 @@ To install the Flutter PayPal Payment Package, follow these steps
    ```dart
    Stripe.instance.presentPaymentSheet();
     ```
-5. makePayment
+6. makePayment
    ```dart
    Future makePayment(  {required PaymentIntentInputModel paymentIntentInputModel}) async {
    var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
@@ -68,10 +69,10 @@ To install the Flutter PayPal Payment Package, follow these steps
    await displayPaymentSheet();
    }
     ```
-   6.Create Ephemeral Key , Information on the Customer object is sensitive, and can’t be retrieved directly from an app. An Ephemeral Key grants the SDK temporary access to the Customer:
-   ```dart
-   Future<EphemeralKeyModel> createEphemeralKey( {required String customerId}) async {
-    var response = await apiService.post(
+   7. Create Ephemeral Key , Information on the Customer object is sensitive, and can’t be retrieved directly from an app. An Ephemeral Key grants the SDK temporary access to the Customer:
+      ```dart
+      Future<EphemeralKeyModel> createEphemeralKey( {required String customerId}) async {
+      var response = await apiService.post(
         data: {'customer': customerId},
         endPoint:https://api.stripe.com/v1/ephemeral_keys,
         options: Options(
@@ -83,12 +84,17 @@ To install the Flutter PayPal Payment Package, follow these steps
      
        );
 
-    var ephermeralKey = EphemeralKeyModel.fromJson(response);
+      var ephermeralKey = EphemeralKeyModel.fromJson(response);
 
-    return ephermeralKey;
-  }
-    ``` 
-   
+      return ephermeralKey;
+      }
+      
+    ```
+  8. Create Customer (use an existing Customer ID if this is a returning customer)
+     ```dart
+        curl https://api.stripe.com/v1/customers \
+       -X "POST"
+  
 
 
 
