@@ -1,8 +1,7 @@
 import 'package:checkout_payment_integration/core/presentation/constants/app_image.dart';
 import 'package:checkout_payment_integration/core/presentation/constants/app_spaces.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/my_cart_view/widget/order_info_item.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_bottom_sheet.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_cubit.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/payment_method_view/payment_methods_bottom_sheet.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/divider_widget.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/total_price_widget.dart';
@@ -11,6 +10,8 @@ import 'package:checkout_payment_integration/infrastructure/utils/functions/show
 import 'package:checkout_payment_integration/infrastructure/utils/functions/show_dialog/show_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'order_info_item.dart';
 
 class MyCartViewBody extends StatelessWidget {
   const MyCartViewBody({super.key});

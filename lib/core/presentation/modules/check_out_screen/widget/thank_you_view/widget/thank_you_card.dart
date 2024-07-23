@@ -1,7 +1,7 @@
 import 'package:checkout_payment_integration/core/presentation/constants/app_colors.dart';
 import 'package:checkout_payment_integration/core/presentation/constants/app_spaces.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/widget/card_info_widget.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/widget/payment_info_item.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/widget/card_info_widget.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/widget/payment_info_item.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/total_price_widget.dart';
 import 'package:checkout_payment_integration/core/presentation/themes/app_style/app_style.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/dimension_extension.dart';

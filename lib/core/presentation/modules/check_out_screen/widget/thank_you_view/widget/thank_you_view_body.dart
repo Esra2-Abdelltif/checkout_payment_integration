@@ -1,6 +1,6 @@
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/widget/custom_check_icon.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/widget/custom_dashed_line.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/widget/thank_you_card.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/widget/custom_check_icon.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/widget/custom_dashed_line.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/widget/thank_you_card.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/dimension_extension.dart';
 import 'package:flutter/material.dart';
 

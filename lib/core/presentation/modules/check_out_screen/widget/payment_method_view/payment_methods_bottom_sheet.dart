@@ -1,8 +1,8 @@
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/payment_method_view/payment_methods_list_view.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/thank_you_view.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_state.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_cubit.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/payment_method_view/payment_methods_list_view.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/thank_you_view.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,8 +1,9 @@
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/thank_you_view/thank_you_view.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_cubit.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/manger/cubit/payment_state.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_cubit.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:flutter/material.dart';
+
+import '../widget/thank_you_view/thank_you_view.dart';
 
 class PaymentListenerOnStates {
   static void listenerOnStates(

@@ -1,6 +1,6 @@
 import 'package:checkout_payment_integration/bloc_observer.dart';
 import 'package:checkout_payment_integration/core/presentation/constants/app_colors.dart';
-import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/my_cart_view/my_cart_view.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/my_cart_view/my_cart_view.dart';
 import 'package:checkout_payment_integration/infrastructure/singletones/registered_singletones.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
