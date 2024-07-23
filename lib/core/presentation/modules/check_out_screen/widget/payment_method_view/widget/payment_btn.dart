@@ -1,4 +1,4 @@
-import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_cubit.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/thank_you_view.dart';
@@ -47,12 +47,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
   }
 
   void excuteStripePayment(BuildContext context,PaymentCubit paymentCubit) {
-    PaymentIntentInputModel paymentIntentInputModel = PaymentIntentInputModel(
+    PaymentIntentRequestModel paymentIntentInputModel = PaymentIntentRequestModel(
       amount: 50,
       currency: 'USD',
       cusomerId: 'cus_QWBY2jpTOAo5Y6',
     );
-    paymentCubit.makePayment(paymentIntentInputModel: paymentIntentInputModel);
+    paymentCubit.makePayment(paymentIntentRequestModel: paymentIntentInputModel);
   }
 
 

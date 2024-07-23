@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:checkout_payment_integration/core/data/repositories/payment_repositories/payment_repo.dart';
@@ -12,21 +12,21 @@ class PaymentCubit extends Cubit<PaymentState> {
       BlocProvider.of<PaymentCubit>(context);
 
   ServerExceptions? serverException;
-  late PaymentIntentInputModel paymentIntentInputModel;
+  // late PaymentIntentRequestModel paymentIntentRequestModel;
 
 
-  Future<void> makePayment({required PaymentIntentInputModel paymentIntentInputModel}) async {
+  Future<void> makePayment({required PaymentIntentRequestModel paymentIntentRequestModel}) async {
     try {
-      await _makePayment(paymentIntentInputModel: paymentIntentInputModel);
+      await _makePayment(paymentIntentRequestModel: paymentIntentRequestModel);
     } catch (e) {
       emit(NoInternetConnectionState());
     }
   }
 
-  Future<void> _makePayment({required PaymentIntentInputModel paymentIntentInputModel}) async {
+  Future<void> _makePayment({required PaymentIntentRequestModel paymentIntentRequestModel}) async {
     emit(PaymentLoading());
 
-    await getSingleton<PaymentStripeRepository>().makePayment(paymentIntentInputModel: paymentIntentInputModel)
+    await getSingleton<PaymentStripeRepository>().makePayment(paymentIntentRequestModel: paymentIntentRequestModel)
         .then((value) {
       value.fold((l) {
         serverException = l;
