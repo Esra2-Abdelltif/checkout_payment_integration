@@ -1,16 +1,8 @@
-# checkout_payment_integration
+# checkout Payment integration
 
-A new Flutter project.
+I show how to build a seamless checkout experience on mobile and web using Stripe and PayPal.
 
-## Getting Started
+## Flutter Stripe Payment Package
 
-This project is a starting point for a Flutter application.
+Stripe is a popular payment processing platform that allows businesses to accept online payments . This plugin provides tools to handle payment flows, such as setting up payment methods, creating payments , and managing subscriptions. It's commonly used for e-commerce apps and other platforms that require payment processing . A few resources to get you started if this is your first Flutter project:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
