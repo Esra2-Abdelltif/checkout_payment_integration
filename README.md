@@ -17,7 +17,6 @@ To install the Flutter PayPal Payment Package, follow these steps
      flutter_stripe: ^10.2.0
     ``` 
 2. Run the following command to fetch the package:
-
     ``` 
     flutter pub get
     ``` 
@@ -37,24 +36,22 @@ To install the Flutter PayPal Payment Package, follow these steps
    runApp(const App());
    }
     ```
-3. Create a PaymentIntent:
-   Stripe uses this to represent your intent to collect payment from a customer.
+3. Create a PaymentIntent , Stripe uses this to represent your intent to collect payment from a customer.
    ```dart
    curl https://api.stripe.com/v1/payment_intents \
    -X "POST"
 
     ```
 4.  Integrate the payment sheet 
-
    ```dart
- Future initPaymentSheet({required String paymentIntentClientSecret}) async {
-  await Stripe.instance.initPaymentSheet(
+   Future initPaymentSheet({required String paymentIntentClientSecret}) async {
+    await Stripe.instance.initPaymentSheet(
     paymentSheetParameters: SetupPaymentSheetParameters(
       paymentIntentClientSecret: paymentIntentClientSecret,
       merchantDisplayName: 'esraa',
-    ),
-  );
-}
+     ),
+   );
+  }
 
   ```
 5. displayPaymentSheet
@@ -69,8 +66,8 @@ To install the Flutter PayPal Payment Package, follow these steps
    await displayPaymentSheet();
    }
     ```
-   7. Create Ephemeral Key , Information on the Customer object is sensitive, and can’t be retrieved directly from an app. An Ephemeral Key grants the SDK temporary access to the Customer:
-      ```dart
+7. Create Ephemeral Key , Information on the Customer object is sensitive, and can’t be retrieved directly from an app. An Ephemeral Key grants the SDK temporary access to the Customer:
+     ```dart
       Future<EphemeralKeyModel> createEphemeralKey( {required String customerId}) async {
       var response = await apiService.post(
         data: {'customer': customerId},
