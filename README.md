@@ -42,7 +42,7 @@ To install the Flutter PayPal Payment Package, follow these steps
    -X "POST"
 
     ```
-4.  Integrate the payment sheet 
+4. Integrate the payment sheet 
    ```dart
    Future initPaymentSheet({required String paymentIntentClientSecret}) async {
     await Stripe.instance.initPaymentSheet(
@@ -51,15 +51,17 @@ To install the Flutter PayPal Payment Package, follow these steps
       merchantDisplayName: 'esraa',
      ),
    );
-  }
+   }
 
-  ```
+   ```
 5. displayPaymentSheet
    ```dart
    Stripe.instance.presentPaymentSheet();
     ```
+   
 6. makePayment
    ```dart
+   
    Future makePayment(  {required PaymentIntentInputModel paymentIntentInputModel}) async {
    var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
    await initPaymentSheet(   paymentIntentClientSecret: paymentIntentModel.clientSecret!);
