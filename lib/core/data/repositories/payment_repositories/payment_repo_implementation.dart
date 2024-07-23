@@ -17,10 +17,10 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
   Future<Either<ServerExceptions, PaymentIntentResponseModel >> makePayment(
       {required PaymentIntentRequestModel paymentIntentRequestModel}) async {
     try {
-      await stripeService.makePayment(
+      final result =    await stripeService.makePayment(
           paymentIntentRequestModel: paymentIntentRequestModel);
 
-      return right(PaymentIntentResponseModel());
+      return right(result);
     } on StripeException catch (e) {
       return left(ConflictException(
         errorCode:  e.error.message ?? 'Oops there was an error',
@@ -41,9 +41,9 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
   Future<Either<ServerExceptions, CreateCustomersResponseModel >> createCustomer(
       {required CreateCustomerRequestModel createCustomerRequestModel})async {
     try {
-      await stripeService.createCustomers(createCustomerRequestModel: createCustomerRequestModel);
+      final result = await stripeService.createCustomers(createCustomerRequestModel: createCustomerRequestModel);
 
-      return right(CreateCustomersResponseModel());
+      return right(result);
     } on StripeException catch (e) {
       return left(ConflictException(
           errorCode:  e.error.message ?? 'Oops there was an error',
