@@ -14,7 +14,7 @@ To install the Flutter PayPal Payment Package, follow these steps
 1. Add the package to your project's dependencies in the `pubspec.yaml` file:
    ```yaml
    dependencies:
-     flutter_paypal_payment: ^1.0.0
+     flutter_stripe: ^10.2.0
     ``` 
 2. Run the following command to fetch the package:
 
