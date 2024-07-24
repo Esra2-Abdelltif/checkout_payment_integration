@@ -48,7 +48,7 @@ dependencies:
   flutter_paypal_payment: ^1.0.6
   dartz: ^0.10.1
   dio: ^5.5.0+1
-
+  url_launcher: ^6.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

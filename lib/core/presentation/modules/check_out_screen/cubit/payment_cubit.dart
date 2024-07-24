@@ -1,3 +1,4 @@
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_request_model/create_customer_request_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_response_model/create_customer_response_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:checkout_payment_integration/core/data/repositories/payment_repositories/payment_repo.dart';
 import 'package:checkout_payment_integration/infrastructure/errors/exceptions/server_exceptions/server_exceptions.dart';
 import 'package:checkout_payment_integration/infrastructure/singletones/registered_singletones.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentInitial());
@@ -15,6 +17,8 @@ class PaymentCubit extends Cubit<PaymentState> {
   ServerExceptions? serverException;
   late CreateCustomersResponseModel createCustomerRequestModel;
   String customerId='';
+  String? paymentKey;
+
 
 
   Future<void> makePayment({required PaymentIntentRequestModel paymentIntentRequestModel}) async {
@@ -32,9 +36,9 @@ class PaymentCubit extends Cubit<PaymentState> {
         .then((value) {
       value.fold((l) {
         serverException = l;
-        emit(PaymentFailure());
+        emit(PaymentStripeFailure());
       }, (r) {
-        emit(PaymentSuccess());
+        emit(PaymentStripeSuccess());
       });
     });
   }
@@ -68,5 +72,29 @@ class PaymentCubit extends Cubit<PaymentState> {
     });
   }
 
+
+  Future<void> makePayMobPayment({required PaymentPayMobRequestModel paymentPayMobRequestModel }) async {
+     try {
+      await _makePayMobPayment(paymentPayMobRequestModel: paymentPayMobRequestModel);
+    } catch (e) {
+      emit(NoInternetConnectionState());
+    }
+  }
+
+  Future<void> _makePayMobPayment({required PaymentPayMobRequestModel paymentPayMobRequestModel  }) async {
+    emit(PaymentLoading());
+
+    await getSingleton<PaymentStripeRepository>().makePayMobPayment(paymentPayMobRequestModel: paymentPayMobRequestModel)
+        .then((value) {
+      value.fold((l) {
+        serverException = l;
+        emit(PaymentPayPalFailure());
+      }, (r) {
+        paymentKey=r;
+         emit(PaymentPayPalSuccess());
+
+      });
+    });
+  }
 
 }

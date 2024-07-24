@@ -6,9 +6,9 @@ class NoInternetConnectionState extends PaymentState {}
 
 final class PaymentLoading extends PaymentState {}
 
-final class PaymentSuccess extends PaymentState {}
+final class PaymentStripeSuccess extends PaymentState {}
 
-final class PaymentFailure extends PaymentState {}
+final class PaymentStripeFailure extends PaymentState {}
 
 
 final class CreateCustomerLoading extends PaymentState {}
@@ -16,3 +16,9 @@ final class CreateCustomerLoading extends PaymentState {}
 final class CreateCustomerSuccess extends PaymentState {}
 
 final class CreateCustomerFailure extends PaymentState {}
+
+
+
+final class PaymentPayPalSuccess extends PaymentState {}
+
+final class PaymentPayPalFailure extends PaymentState {}

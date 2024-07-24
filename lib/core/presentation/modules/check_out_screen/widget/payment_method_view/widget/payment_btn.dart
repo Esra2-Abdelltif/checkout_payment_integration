@@ -1,3 +1,4 @@
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/amount_model/amount_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/amount_model/details.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/item_list_model/item.dart';
@@ -9,10 +10,11 @@ import 'package:checkout_payment_integration/core/presentation/modules/check_out
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/my_cart_view/my_cart_view.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/thank_you_view/thank_you_view.dart';
 import 'package:checkout_payment_integration/core/presentation/shared_widget/custom_button.dart';
+import 'package:checkout_payment_integration/infrastructure/services/remote/local/payment_service/paymob_service.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/functions/execute_paypal_payment/execute%20_paypal_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 class CustomButtonBlocConsumer extends StatelessWidget {
   final int index;
 
@@ -35,7 +37,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                 executePaypalPayment(context: context,nextScreenIfSuccess:const ThankYouView(),nextScreenIfError:const MyCartViewSection(),transctionsData:  transctionsData);
               }
               else {
-
+               pay(paymentCubit);
               }
             },
             isLoading: state is PaymentLoading ? true : false,
@@ -77,5 +79,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     var itemList = ItemListModel(orders: orders);
 
     return (amount: amount, itemList: itemList);
+  }
+  void pay(PaymentCubit paymentCubit) {
+   paymentCubit.makePayMobPayment(
+     paymentPayMobRequestModel: PaymentPayMobRequestModel(amount: 10, currency: 'EGP'),
+
+     );
+
   }
 }

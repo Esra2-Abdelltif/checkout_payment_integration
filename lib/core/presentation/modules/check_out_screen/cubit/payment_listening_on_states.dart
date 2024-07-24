@@ -2,7 +2,6 @@ import 'package:checkout_payment_integration/core/presentation/modules/check_out
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
 import 'package:flutter/material.dart';
-
 import '../widget/thank_you_view/thank_you_view.dart';
 
 class PaymentListenerOnStates {
@@ -12,20 +11,28 @@ class PaymentListenerOnStates {
       PaymentCubit paymentCubit,
   ) {
 
-    if (state is PaymentSuccess) {
+    if (state is PaymentStripeSuccess) {
       context.pushReplacementContext(route: const ThankYouView());
     }
-    if (state is PaymentFailure) {
+    if (state is PaymentStripeFailure) {
       context.popContext();
       SnackBar snackBar = SnackBar(content: Text(paymentCubit.serverException!.errorMessage!));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+
+    if (state is PaymentStripeFailure) {
+      context.popContext();
+      SnackBar snackBar = SnackBar(content: Text(paymentCubit.serverException!.errorMessage!));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     if (state is NoInternetConnectionState) {
       context.popContext();
 
       SnackBar snackBar = const SnackBar(content: Text("Check your internet connection"));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+
     }
 
 }
