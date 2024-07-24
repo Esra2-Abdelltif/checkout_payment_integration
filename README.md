@@ -126,23 +126,24 @@ To install the Flutter PayPal Payment Package, follow these steps
  integration of PayPal payments into your mobile application.
 
 ## Usage
+
 1. Get Authantication Token:
    ```dart
      curl https://accept.paymob.com/api/auth/tokens \
      -X "POST"   
     ```
    
-2.  Get Order Id by Using Authantication Token:
+2. Get Order Id by Using Authantication Token:
    ```dart
      curl https://accept.paymob.com/api/ecommerce/orders \
      -X "POST" 
    ```
-3-Get PaymentKey by Using Authantication Token and  OrderId
- ```dart
+3- Get PaymentKey by Using Authantication Token and  OrderId
+   ```dart
      curl https://accept.paymob.com/api/acceptance/payment_keys \
      -X "POST" 
    ```
-4-Open PayMob Screen 
- ```dart
+4- Open PayMob Screen 
+   ```dart
      curl "https://accept.paymob.com/api/acceptance/iframes/$iframes?payment_token=$PaymentKey
    ```
