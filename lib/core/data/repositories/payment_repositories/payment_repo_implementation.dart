@@ -14,13 +14,13 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
   final StripeService stripeService = StripeService();
 
   @override
-  Future<Either<ServerExceptions, PaymentIntentResponseModel >> makePayment(
+  Future<Either<ServerExceptions, String >> makePayment(
       {required PaymentIntentRequestModel paymentIntentRequestModel}) async {
     try {
       final result =    await stripeService.makePayment(
           paymentIntentRequestModel: paymentIntentRequestModel);
 
-      return right(result);
+      return right("");
     } on StripeException catch (e) {
       return left(ConflictException(
         errorCode:  e.error.message ?? 'Oops there was an error',
