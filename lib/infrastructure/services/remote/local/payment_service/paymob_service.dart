@@ -1,5 +1,6 @@
 import 'package:checkout_payment_integration/core/data/constants/api_constants/end_points.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/paymob_key_model.dart';
 import 'package:checkout_payment_integration/infrastructure/services/remote/local/api/api_helper_implementation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../env/environment_variables.dart';
@@ -17,14 +18,15 @@ class PayMobService {
       );
 
       String paymentKey= await _getPaymentKey(
+        payMobKeyRequestModel: PayMobKeyRequestModel(
         authanticationToken: authanticationToken,
         amount: (paymentPayMobRequestModel.amount).toString(),
         currency: paymentPayMobRequestModel.currency,
         orderId: orderId.toString(),
-      );
+      )
+    );
 
-      return launchUrl(
-          Uri.parse("https://accept.paymob.com/api/acceptance/iframes/787141?payment_token=$paymentKey"));
+      return launchUrl(Uri.parse("https://accept.paymob.com/api/acceptance/iframes/787141?payment_token=$paymentKey"));
   }
 
   Future<String>getAuthanticationToken()async{
@@ -56,20 +58,17 @@ class PayMobService {
   }
 
   Future<String> _getPaymentKey({
-    required String authanticationToken,
-    required String orderId,
-    required String amount,
-    required String currency,
+    required PayMobKeyRequestModel payMobKeyRequestModel,
   }) async{
     var response = await apiService.post(
         data: {
         //ALL OF THEM ARE REQIERD
         "expiration": 3600,
-        "auth_token": authanticationToken,//From First Api
-        "order_id":orderId,//From Second Api  >>(STRING)<<
+        "auth_token": payMobKeyRequestModel.authanticationToken,//From First Api
+        "order_id":payMobKeyRequestModel.orderId,//From Second Api  >>(STRING)<<
         "integration_id": EnvironmentVariables.setCardPaymentMethodIntegrationIdValue(),//Integration Id Of The Payment Method
-        "amount_cents": "${amount}00",
-        "currency": currency,
+        "amount_cents": "${payMobKeyRequestModel.amount}00",
+        "currency": payMobKeyRequestModel.currency,
         "billing_data": {
         //Have To Be Values
         "first_name": "Clifford",

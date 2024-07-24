@@ -6,11 +6,4 @@ class PaymentIntentRequestModel {
   PaymentIntentRequestModel(
       {required this.cusomerId, required this.amount, required this.currency});
 
-  toJson() {
-    return {
-      'amount': amount*100,
-      'currency': currency,
-      'customer': cusomerId
-    };
-  }
 }
