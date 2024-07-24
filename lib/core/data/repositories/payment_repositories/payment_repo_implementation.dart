@@ -4,7 +4,7 @@ import 'package:checkout_payment_integration/core/data/model/payment_getway_mode
 import 'package:checkout_payment_integration/core/data/repositories/payment_repositories/payment_repo.dart';
 import 'package:checkout_payment_integration/infrastructure/errors/exceptions/server_exceptions/conflict_exception.dart';
 import 'package:checkout_payment_integration/infrastructure/errors/exceptions/server_exceptions/server_exceptions.dart';
-import 'package:checkout_payment_integration/infrastructure/services/remote/local/stripe_service/stripe_service.dart';
+import 'package:checkout_payment_integration/infrastructure/services/remote/local/payment_service/stripe_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';

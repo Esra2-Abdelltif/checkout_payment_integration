@@ -14,9 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomButtonBlocConsumer extends StatelessWidget {
-  final bool isPaypal;
+  final int index;
 
-  const CustomButtonBlocConsumer({super.key, required this.isPaypal,});
+  const CustomButtonBlocConsumer({super.key, required this.index,});
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +28,14 @@ class CustomButtonBlocConsumer extends StatelessWidget {
         PaymentCubit paymentCubit=PaymentCubit.ofCurrentContext(context);
         return CustomButton(
             onTap: () {
-              if (isPaypal) {
+              if (index==0) {
+                executeStripePayment(context,paymentCubit);
+                } if(index==1){
                 var transctionsData = getTransctionsData();
                 executePaypalPayment(context: context,nextScreenIfSuccess:const ThankYouView(),nextScreenIfError:const MyCartViewSection(),transctionsData:  transctionsData);
-              } else {
-                executeStripePayment(context,paymentCubit);
+              }
+              else {
+
               }
             },
             isLoading: state is PaymentLoading ? true : false,
