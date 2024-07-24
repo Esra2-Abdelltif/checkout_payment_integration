@@ -16,8 +16,7 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
   Future<Either<ServerExceptions, String >> makePayment(
       {required PaymentIntentRequestModel paymentIntentRequestModel}) async {
     try {
-      final result =    await stripeService.makePayment(
-          paymentIntentRequestModel: paymentIntentRequestModel);
+        await stripeService.makePayment(paymentIntentRequestModel: paymentIntentRequestModel);
 
       return right("");
     } on StripeException catch (e) {
