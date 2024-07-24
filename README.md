@@ -69,24 +69,8 @@ To install the Flutter PayPal Payment Package, follow these steps
     ```
 7. Create Ephemeral Key , Information on the Customer object is sensitive, and can’t be retrieved directly from an app. An Ephemeral Key grants the SDK temporary access to the Customer:
      ```dart
-      Future<EphemeralKeyModel> createEphemeralKey( {required String customerId}) async {
-      var response = await apiService.post(
-        data: {'customer': customerId},
-        endPoint:https://api.stripe.com/v1/ephemeral_keys,
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers:{'Authorization': "Bearer $SecretKey",
-          'Stripe-Version': '2023-08-16',
-         },
-        ));
-     
-       );
-
-      var ephermeralKey = EphemeralKeyModel.fromJson(response);
-
-      return ephermeralKey;
-      }
-      
+     curl https://api.stripe.com/v1/ephemeral_keys \
+     -X "POST"   
     ```
   8. Create Customer (use an existing Customer ID if this is a returning customer)
      ```dart
