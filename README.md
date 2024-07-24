@@ -4,8 +4,7 @@ I show how to build a seamless checkout experience on mobile and web using Strip
 
 ### ⚡  Flutter Stripe Payment Package
 
-Stripe is a popular payment processing platform that allows businesses to accept online payments . This plugin provides tools to handle payment flows, such as setting up payment methods, creating payments , and managing subscriptions. It's commonly used for e-commerce apps and other platforms that require payment processing .
-
+The Stripe Flutter SDK allows you to build delightful payment experiences in your native Android and iOS apps using Flutter.
 
 ## Installation
 
@@ -95,3 +94,48 @@ To install the Flutter PayPal Payment Package, follow these steps
        -X "POST"
   
 ### ⚡  Flutter PayPal Payment Package
+
+The Flutter PayPal Payment Package is a convenient solution that enables seamless integration of PayPal payments into your mobile application.
+
+## Installation
+
+To install the Flutter PayPal Payment Package, follow these steps
+
+1. Add the package to your project's dependencies in the `pubspec.yaml` file:
+   ```yaml
+   dependencies:
+     flutter_paypal_payment: ^1.0.0
+    ``` 
+2. Run the following command to fetch the package:
+
+    ``` 
+    flutter pub get
+    ``` 
+
+## Usage
+1. Import the package into your Dart file:
+
+    ``` 
+    import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
+    ```
+2. Navigate to the PayPal checkout view with the desired configuration:
+    ```dart
+    PaypalCheckoutView(
+    sandboxMode: true,
+    clientId: "YOUR_CLIENT_ID",
+    secretKey: "YOUR_SECRET_KEY",
+    transactions: const [
+        // Define your transaction details here
+    ],
+    onSuccess: (Map params) async {
+        // Handle successful payment
+ },
+    onError: (error) {
+        // Handle payment error
+    },
+    onCancel: () {
+        // Handle payment cancellationImplement the onSuccess, onError, and onCancel callbacks to handle the respective payment outcomes.
+    },
+    );
+    ```
+
