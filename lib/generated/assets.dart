@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String checkoutPaymentIntegration = '.env';
   static const String fontsInterBold = 'assets/fonts/Inter-Bold.ttf';
   static const String fontsInterMedium = 'assets/fonts/Inter-Medium.ttf';
   static const String fontsInterRegular = 'assets/fonts/Inter-Regular.ttf';

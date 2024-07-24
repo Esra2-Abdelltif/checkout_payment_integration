@@ -17,7 +17,7 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
   final List<String> paymentMethodsItems = const [
     AppImagePaths.cardImage,
     AppImagePaths.payPalImage,
-    AppImagePaths.applePayImage,
+    AppImagePaths.masterCardImage,
 
   ];
 
