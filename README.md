@@ -8,7 +8,7 @@ The Stripe Flutter SDK allows you to build delightful payment experiences in you
 
 ## Installation
 
-To install the Flutter PayPal Payment Package, follow these steps
+To install the Flutter Stripe Payment Package, follow these steps
 
 1. Add the package to your project's dependencies in the `pubspec.yaml` file:
    ```yaml
