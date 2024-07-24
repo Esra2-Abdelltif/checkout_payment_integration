@@ -2,7 +2,7 @@
 
 I show how to build a seamless checkout experience on mobile and web using Stripe and PayPal.
 
-### ⚡  Flutter Stripe Payment Package
+### ⚡  Flutter Stripe Payment 
 
 The Stripe Flutter SDK allows you to build delightful payment experiences in your native Android and iOS apps using Flutter.
 
@@ -77,7 +77,7 @@ To install the Flutter Stripe Payment Package, follow these steps
         curl https://api.stripe.com/v1/customers \
        -X "POST"
   
-### ⚡  Flutter PayPal Payment Package
+### ⚡  Flutter PayPal Payment 
 
 The Flutter PayPal Payment Package is a convenient solution that enables seamless integration of PayPal payments into your mobile application.
 
@@ -122,4 +122,27 @@ To install the Flutter PayPal Payment Package, follow these steps
     },
     );
     ```
+### ⚡  Flutter PayMob Payment 
+ integration of PayPal payments into your mobile application.
 
+## Usage
+1. Get Authantication Token:
+   ```dart
+     curl https://accept.paymob.com/api/auth/tokens \
+     -X "POST"   
+    ```
+   
+2.  Get Order Id by Using Authantication Token:
+   ```dart
+     curl https://accept.paymob.com/api/ecommerce/orders \
+     -X "POST" 
+   ```
+3-Get PaymentKey by Using Authantication Token and  OrderId
+ ```dart
+     curl https://accept.paymob.com/api/acceptance/payment_keys \
+     -X "POST" 
+   ```
+4-Open PayMob Screen 
+ ```dart
+     curl "https://accept.paymob.com/api/acceptance/iframes/$iframes?payment_token=$PaymentKey
+   ```
