@@ -34,7 +34,7 @@ To install the Flutter Stripe Payment Package, follow these steps
    
    runApp(const App());
    }
-    ```
+   ```
 3. Create a PaymentIntent , Stripe uses this to represent your intent to collect payment from a customer.
    ```dart
    curl https://api.stripe.com/v1/payment_intents \
@@ -138,12 +138,12 @@ To install the Flutter PayPal Payment Package, follow these steps
      curl https://accept.paymob.com/api/ecommerce/orders \
      -X "POST" 
    ```
-3- Get PaymentKey by Using Authantication Token and  OrderId
+3. Get PaymentKey by Using Authantication Token and  OrderId
    ```dart
      curl https://accept.paymob.com/api/acceptance/payment_keys \
      -X "POST" 
    ```
-4- Open PayMob Screen 
+4. Open PayMob Screen 
    ```dart
      curl "https://accept.paymob.com/api/acceptance/iframes/$iframes?payment_token=$PaymentKey
    ```
