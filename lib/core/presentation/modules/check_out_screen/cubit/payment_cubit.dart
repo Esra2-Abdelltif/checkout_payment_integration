@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:checkout_payment_integration/core/data/repositories/payment_repositories/payment_repo.dart';
 import 'package:checkout_payment_integration/infrastructure/errors/exceptions/server_exceptions/server_exceptions.dart';
 import 'package:checkout_payment_integration/infrastructure/singletones/registered_singletones.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   PaymentCubit() : super(PaymentInitial());
