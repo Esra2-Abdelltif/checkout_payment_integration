@@ -21,7 +21,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   Future<void> makeStripePayment({required PaymentIntentRequestModel paymentIntentRequestModel,}) async {
     try {
       await _makeStripePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: CreateCustomerRequestModel(
-        name: "Test"
+        name: "Esraa Abdellatif"
       ));
     } catch (e) {
       emit(NoInternetConnectionState());
