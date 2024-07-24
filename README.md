@@ -47,7 +47,7 @@ To install the Flutter PayPal Payment Package, follow these steps
     await Stripe.instance.initPaymentSheet(
     paymentSheetParameters: SetupPaymentSheetParameters(
       paymentIntentClientSecret: paymentIntentClientSecret,
-      merchantDisplayName: 'esraa',
+      merchantDisplayName://DisplayName,
      ),
    );
    }
