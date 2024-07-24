@@ -1,6 +1,8 @@
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_cubit.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
+import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/widget/my_cart_view/my_cart_view.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
+import 'package:checkout_payment_integration/infrastructure/utils/widget/paymob_checkout_view.dart';
 import 'package:flutter/material.dart';
 import '../widget/thank_you_view/thank_you_view.dart';
 
@@ -11,6 +13,7 @@ class PaymentListenerOnStates {
       PaymentCubit paymentCubit,
   ) {
 
+    //STRIPE
     if (state is PaymentStripeSuccess) {
       context.pushReplacementContext(route: const ThankYouView());
     }
@@ -19,7 +22,16 @@ class PaymentListenerOnStates {
       SnackBar snackBar = SnackBar(content: Text(paymentCubit.serverException!.errorMessage!));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-
+    //PAYMOB
+    if (state is PaymentPayMobSuccess) {
+      context.pushContext(route: PayMobCheckoutView(url: paymentCubit.url!,nextScreenIfError: const MyCartViewSection(),nextScreenIfSuccess: const ThankYouView(),),);
+    }
+    if (state is PaymentPayMobFailure) {
+      context.popContext();
+      SnackBar snackBar = SnackBar(content: Text(paymentCubit.serverException!.errorMessage!));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    //paypal
     if (state is PaymentPayPalFailure) {
       context.popContext();
       SnackBar snackBar = SnackBar(content: Text(paymentCubit.serverException!.errorMessage!));

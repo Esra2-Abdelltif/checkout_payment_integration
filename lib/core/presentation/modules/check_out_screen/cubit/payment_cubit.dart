@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_request_model/create_customer_request_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
@@ -13,6 +15,7 @@ class PaymentCubit extends Cubit<PaymentState> {
       BlocProvider.of<PaymentCubit>(context);
 
   ServerExceptions? serverException;
+  String? url;
 
 ///makeStripePayment
   Future<void> makeStripePayment({required PaymentIntentRequestModel paymentIntentRequestModel,}) async {
@@ -34,6 +37,7 @@ class PaymentCubit extends Cubit<PaymentState> {
         serverException = l;
         emit(PaymentStripeFailure());
       }, (r) {
+
         emit(PaymentStripeSuccess());
       });
     });
@@ -54,9 +58,11 @@ class PaymentCubit extends Cubit<PaymentState> {
         .then((value) {
       value.fold((l) {
         serverException = l;
-        emit(PaymentPayPalFailure());
+        emit(PaymentPayMobFailure());
       }, (r) {
-         emit(PaymentPayPalSuccess());
+        url=r;
+        log("---------------object$url");
+         emit(PaymentPayMobSuccess());
 
       });
     });

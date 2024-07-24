@@ -2,13 +2,12 @@ import 'package:checkout_payment_integration/core/data/constants/api_constants/e
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/paymob_key_model.dart';
 import 'package:checkout_payment_integration/infrastructure/services/remote/local/api/api_helper_implementation.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../../env/environment_variables.dart';
 
 class PayMobService {
   final ApiHelperImplementation apiService = ApiHelperImplementation();
 
-  Future<dynamic> makePayMobPayment({required PaymentPayMobRequestModel paymentPayMobRequestModel})async{
+  Future<String> makePayMobPayment({required PaymentPayMobRequestModel paymentPayMobRequestModel})async{
       String authanticationToken= await getAuthanticationToken();
 
       int orderId= await _getOrderId(
@@ -26,7 +25,7 @@ class PayMobService {
       )
     );
 
-      return launchUrl(Uri.parse("https://accept.paymob.com/api/acceptance/iframes/787141?payment_token=$paymentKey"));
+      return "https://accept.paymob.com/api/acceptance/iframes/787141?payment_token=$paymentKey";
   }
 
   Future<String>getAuthanticationToken()async{

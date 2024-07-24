@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/amount_model/amount_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/amount_model/details.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/item_list_model/item.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/item_list_model/item_list_model.dart';
 import 'package:checkout_payment_integration/infrastructure/env/environment_variables.dart';
 import 'package:checkout_payment_integration/infrastructure/utils/extensions/navigation_extension.dart';
@@ -57,4 +59,29 @@ void executePaypalPayment({required BuildContext context,
     },
   ));
 
+}
+({AmountModel amount, ItemListModel itemList}) getTransctionsData() {
+  var amount = AmountModel(
+      total: "50",
+      currency: 'USD',
+      details: Details(shipping: "0", shippingDiscount: 0, subtotal: '50'));
+
+  List<OrderItemModel> orders = [
+    OrderItemModel(
+      currency: 'USD',
+      name: 'Apple',
+      price: "10",
+      quantity: 4,
+    ),
+    OrderItemModel(
+      currency: 'USD',
+      name: 'Apple',
+      price: "10",
+      quantity: 1,
+    ),
+  ];
+
+  var itemList = ItemListModel(orders: orders);
+
+  return (amount: amount, itemList: itemList);
 }
