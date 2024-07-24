@@ -17,9 +17,9 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
 
   @override
   Future<Either<ServerExceptions, String >> makePayment(
-      {required PaymentIntentRequestModel paymentIntentRequestModel}) async {
+      {required PaymentIntentRequestModel paymentIntentRequestModel,required CreateCustomerRequestModel createCustomerRequestModel}) async {
     try {
-        await stripeService.makePayment(paymentIntentRequestModel: paymentIntentRequestModel);
+        await stripeService.makePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: createCustomerRequestModel);
 
       return right("");
     } on StripeException catch (e) {
@@ -35,29 +35,6 @@ class PaymentStripeReposImplementation extends PaymentStripeRepository {
           statusCode: 409
       ));
     }
-  }
-
-  ///TODO FIND WAY TO PRINT RESPONSE
-  @override
-  Future<Either<ServerExceptions, CreateCustomersResponseModel >> createCustomer(
-      {required CreateCustomerRequestModel createCustomerRequestModel})async {
-    try {
-      final result = await stripeService.createCustomers(createCustomerRequestModel: createCustomerRequestModel);
-
-      return right(result);
-    } on StripeException catch (e) {
-      return left(ConflictException(
-          errorCode:  e.error.message ?? 'Oops there was an error',
-          errorMessage:  e.error.message ?? 'Oops there was an error',
-          statusCode: e.hashCode
-      ));
-    } catch (e) {
-      return left(ConflictException(
-          errorCode:  e.toString() ,
-          errorMessage:  e.toString(),
-          statusCode: 409
-      ));
-  }
   }
 
 

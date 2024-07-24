@@ -30,11 +30,12 @@ class CustomButtonBlocConsumer extends StatelessWidget {
             onTap: () {
               if (index==0) {
                 executeStripePayment(context,paymentCubit);
-                } if(index==1){
+                }
+              if(index==1){
                 var transctionsData = getTransctionsData();
                 executePaypalPayment(context: context,nextScreenIfSuccess:const ThankYouView(),nextScreenIfError:const MyCartViewSection(),transctionsData:  transctionsData);
               }
-              else {
+              if(index==2){
                pay(paymentCubit);
               }
             },
@@ -50,8 +51,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
       currency: 'USD',
       cusomerId: "cus_QWoz4ObCOvUhKH",
     );
-      paymentCubit.createCustomer();
-      await paymentCubit.makePayment(paymentIntentRequestModel: paymentIntentInputModel);
+      await paymentCubit.makeStripePayment(paymentIntentRequestModel: paymentIntentInputModel);
   }
  ({AmountModel amount, ItemListModel itemList}) getTransctionsData() {
     var amount = AmountModel(
@@ -78,9 +78,10 @@ class CustomButtonBlocConsumer extends StatelessWidget {
 
     return (amount: amount, itemList: itemList);
   }
+
   void pay(PaymentCubit paymentCubit) {
    paymentCubit.makePayMobPayment(
-     paymentPayMobRequestModel: PaymentPayMobRequestModel(amount: 10, currency: 'EGP'),
+     paymentPayMobRequestModel: PaymentPayMobRequestModel(amount: 50, currency: 'EGP'),
 
      );
 

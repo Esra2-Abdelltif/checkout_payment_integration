@@ -20,7 +20,7 @@ class PaymentListenerOnStates {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
-    if (state is PaymentStripeFailure) {
+    if (state is PaymentPayPalFailure) {
       context.popContext();
       SnackBar snackBar = SnackBar(content: Text(paymentCubit.serverException!.errorMessage!));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);

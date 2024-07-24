@@ -1,6 +1,5 @@
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_request_model/create_customer_request_model.dart';
-import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_response_model/create_customer_response_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,24 +13,22 @@ class PaymentCubit extends Cubit<PaymentState> {
       BlocProvider.of<PaymentCubit>(context);
 
   ServerExceptions? serverException;
-  late CreateCustomersResponseModel createCustomerRequestModel;
-  String customerId='';
-  String? paymentKey;
 
-
-
-  Future<void> makePayment({required PaymentIntentRequestModel paymentIntentRequestModel}) async {
+///makeStripePayment
+  Future<void> makeStripePayment({required PaymentIntentRequestModel paymentIntentRequestModel,}) async {
     try {
-      await _makePayment(paymentIntentRequestModel: paymentIntentRequestModel);
+      await _makeStripePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: CreateCustomerRequestModel(
+        name: "Test"
+      ));
     } catch (e) {
       emit(NoInternetConnectionState());
     }
   }
 
-  Future<void> _makePayment({required PaymentIntentRequestModel paymentIntentRequestModel}) async {
+  Future<void> _makeStripePayment({required PaymentIntentRequestModel paymentIntentRequestModel,required CreateCustomerRequestModel createCustomerRequestModel}) async {
     emit(PaymentLoading());
 
-    await getSingleton<PaymentStripeRepository>().makePayment(paymentIntentRequestModel: paymentIntentRequestModel)
+    await getSingleton<PaymentStripeRepository>().makePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: createCustomerRequestModel)
         .then((value) {
       value.fold((l) {
         serverException = l;
@@ -43,35 +40,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   }
 
 
-  Future<void> createCustomer() async {
-    try {
-      await _createCustomer(createCustomerRequestModel: CreateCustomerRequestModel(
-        name: "Eso"
-      ));
-    } catch (e) {
-      emit(NoInternetConnectionState());
-    }
-  }
-
-  Future<void> _createCustomer({required CreateCustomerRequestModel createCustomerRequestModel}) async {
-    emit(CreateCustomerLoading());
-
-    await getSingleton<PaymentStripeRepository>().createCustomer(createCustomerRequestModel: createCustomerRequestModel)
-        .then((value) {
-      value.fold((l) {
-        serverException = l;
-        emit(CreateCustomerFailure());
-      }, (r) {
-        customerId=r.id!;
-        print("customerId : ${customerId}");
-        print("r.id! : ${r.id!}");
-        emit(CreateCustomerSuccess());
-
-      });
-    });
-  }
-
-
+///makePayMobPayment
   Future<void> makePayMobPayment({required PaymentPayMobRequestModel paymentPayMobRequestModel }) async {
      try {
       await _makePayMobPayment(paymentPayMobRequestModel: paymentPayMobRequestModel);
@@ -79,17 +48,14 @@ class PaymentCubit extends Cubit<PaymentState> {
       emit(NoInternetConnectionState());
     }
   }
-
   Future<void> _makePayMobPayment({required PaymentPayMobRequestModel paymentPayMobRequestModel  }) async {
     emit(PaymentLoading());
-
     await getSingleton<PaymentStripeRepository>().makePayMobPayment(paymentPayMobRequestModel: paymentPayMobRequestModel)
         .then((value) {
       value.fold((l) {
         serverException = l;
         emit(PaymentPayPalFailure());
       }, (r) {
-        paymentKey=r;
          emit(PaymentPayPalSuccess());
 
       });

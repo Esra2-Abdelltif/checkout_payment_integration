@@ -12,7 +12,7 @@ class PayMobService {
 
       int orderId= await _getOrderId(
         authanticationToken: authanticationToken,
-        amount: (100*paymentPayMobRequestModel.amount).toString(),
+        amount: (paymentPayMobRequestModel.amount).toString(),
         currency: paymentPayMobRequestModel.currency,
       );
 
@@ -45,7 +45,7 @@ class PayMobService {
     var response = await apiService.post(
       data: {
         "auth_token":  authanticationToken,
-        "amount_cents":amount, //  >>(STRING)<<
+        "amount_cents":"${amount}00", //  >>(STRING)<<
         "currency": currency,//Not Req
         "delivery_needed": "false",
         "items": [],
@@ -68,7 +68,7 @@ class PayMobService {
         "auth_token": authanticationToken,//From First Api
         "order_id":orderId,//From Second Api  >>(STRING)<<
         "integration_id": EnvironmentVariables.setCardPaymentMethodIntegrationIdValue(),//Integration Id Of The Payment Method
-        "amount_cents": amount,
+        "amount_cents": "${amount}00",
         "currency": currency,
         "billing_data": {
         //Have To Be Values
