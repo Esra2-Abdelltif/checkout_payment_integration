@@ -33,6 +33,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                 executeStripePayment(context, paymentCubit);
               }
               if (index == 1) {
+                // executePayPalPayment(context,paymentCubit);
                 var transctionsData = getTransctionsData();
                 executePaypalPayment(
                     context: context,
@@ -41,7 +42,7 @@ class CustomButtonBlocConsumer extends StatelessWidget {
                     transctionsData: transctionsData);
               }
               if (index == 2) {
-                pay(context, paymentCubit);
+                executePayMobPayment(context, paymentCubit);
               }
             },
             isLoading: state is PaymentLoading ? true : false,
@@ -58,10 +59,16 @@ class CustomButtonBlocConsumer extends StatelessWidget {
     await paymentCubit.makeStripePayment(paymentIntentRequestModel: paymentIntentInputModel);
   }
 
-  void pay(BuildContext context, PaymentCubit paymentCubit) {
+  void executePayMobPayment(BuildContext context, PaymentCubit paymentCubit) {
     paymentCubit.makePayMobPayment(
       paymentPayMobRequestModel: PaymentPayMobRequestModel(amount: 50, currency: 'EGP'),
     );
   }
-}
+
+  void executePayPalPayment(BuildContext context, PaymentCubit paymentCubit) async {
+    paymentCubit.makePayPalPayment(amount: 100, currency: "USD");
+
+
+  }
+  }
 

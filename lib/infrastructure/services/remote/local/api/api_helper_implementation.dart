@@ -43,9 +43,10 @@ class ApiHelperImplementation extends ApiHelper {
     CancelToken? cancelToken,
     bool isMultipart = false,
     bool isAddStripeVersion = false,
+    bool basicToken=false
 
   }) async {
-    dio.options.headers = _setHeaders(isMultipart, token,isAddStripeVersion: isAddStripeVersion,);
+    dio.options.headers = _setHeaders(isMultipart, token,isAddStripeVersion: isAddStripeVersion,basicToken:basicToken );
     _debugPrintData(endPoint, data, query);
 
     return await requestData(
@@ -148,13 +149,15 @@ class ApiHelperImplementation extends ApiHelper {
     return null;
   }
 
-  _setHeaders(bool isMultipart, String? token, {bool isAddStripeVersion=false}) {
+  _setHeaders(bool isMultipart, String? token, {bool isAddStripeVersion=false,bool basicToken=false}) {
     return {
       if (isMultipart) Headers.contentTypeHeader: Headers.formUrlEncodedContentType,
       if (!isMultipart) Headers.contentTypeHeader:Headers.jsonContentType,
       if (!isMultipart) Headers.acceptHeader: Headers.jsonContentType,
       if (isAddStripeVersion)  'Stripe-Version': '2024-06-20',
-      if (token != null) 'Authorization': "Bearer $token",
+      if (!basicToken || token != null) 'Authorization': "Bearer $token",
+      if (basicToken) 'Authorization': "Basic $token",
+
     };
   }
 

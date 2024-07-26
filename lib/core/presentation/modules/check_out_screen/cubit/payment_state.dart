@@ -16,3 +16,4 @@ final class PaymentPayPalFailure extends PaymentState {}
 
 final class PaymentPayMobSuccess extends PaymentState {}
 final class PaymentPayMobFailure extends PaymentState {}
+

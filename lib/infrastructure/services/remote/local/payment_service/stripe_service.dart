@@ -31,7 +31,7 @@ class StripeService {
       data: createCustomerRequestModel.toJson(),
       isMultipart: true,
       endPoint:createCustomerEndPoint,
-      token: EnvironmentVariables.setSecretKeyValue(),
+      token: EnvironmentVariables.setSecretKeyStripeValue(),
     );
     return response["id"];
 
@@ -50,7 +50,7 @@ class StripeService {
     },
      isMultipart: true,
       endPoint:createPaymentIntentEndPoint,
-      token: EnvironmentVariables.setSecretKeyValue(),
+      token: EnvironmentVariables.setSecretKeyStripeValue(),
     );
 
     var paymentIntentResponseModel = PaymentIntentResponseModel.fromJson(response);
@@ -83,7 +83,7 @@ class StripeService {
       isMultipart: true,
       isAddStripeVersion: true,
         endPoint: ephemeralKeysEndPoint,
-        token:EnvironmentVariables.setSecretKeyValue(),
+        token:EnvironmentVariables.setSecretKeyStripeValue(),
        );
 
     var ephermeralKey = EphemeralKeyModel.fromJson(response);

@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paymob_model/payment_paymob_model.dart';
+import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_paypal_model/paypal_without/create_paypal_model/create_paypal_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/create_customer/create_customer_request_model/create_customer_request_model.dart';
 import 'package:checkout_payment_integration/core/data/model/payment_getway_model/payment_stripe_model/payment_model/payment_intent_request_model/payment_intent_request_model.dart';
 import 'package:checkout_payment_integration/core/presentation/modules/check_out_screen/cubit/payment_state.dart';
@@ -15,9 +15,10 @@ class PaymentCubit extends Cubit<PaymentState> {
       BlocProvider.of<PaymentCubit>(context);
 
   ServerExceptions? serverException;
+  late CreatePayPalPaymentResponseModel createPayPalPaymentResponseModel;
   String? url;
 
-///makeStripePayment
+  ///makeStripePayment
   Future<void> makeStripePayment({required PaymentIntentRequestModel paymentIntentRequestModel,}) async {
     try {
       await _makeStripePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: CreateCustomerRequestModel(
@@ -31,7 +32,7 @@ class PaymentCubit extends Cubit<PaymentState> {
   Future<void> _makeStripePayment({required PaymentIntentRequestModel paymentIntentRequestModel,required CreateCustomerRequestModel createCustomerRequestModel}) async {
     emit(PaymentLoading());
 
-    await getSingleton<PaymentStripeRepository>().makePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: createCustomerRequestModel)
+    await getSingleton<PaymentStripeRepository>().makeStripePayment(paymentIntentRequestModel: paymentIntentRequestModel,createCustomerRequestModel: createCustomerRequestModel)
         .then((value) {
       value.fold((l) {
         serverException = l;
@@ -61,8 +62,31 @@ class PaymentCubit extends Cubit<PaymentState> {
         emit(PaymentPayMobFailure());
       }, (r) {
         url=r;
-        log("---------------object$url");
          emit(PaymentPayMobSuccess());
+
+      });
+    });
+  }
+
+  ///makePayPalPayment WithOut Package
+  Future<void> makePayPalPayment({required double amount,required String currency}) async {
+     try {
+      await _makePayPalPayment(amount:amount,currency: currency, );
+    } catch (e) {
+      emit(NoInternetConnectionState());
+    }
+  }
+  Future<void> _makePayPalPayment({required double amount,required String currency}) async {
+    emit(PaymentLoading());
+    await getSingleton<PaymentStripeRepository>().createPayPalPayment(amount:amount,currency: currency,sandboxMode: true)
+        .then((value) {
+      value.fold((l) {
+        serverException = l;
+        log(l.errorMessage!);
+        emit(PaymentPayPalFailure());
+      }, (r) {
+        createPayPalPaymentResponseModel=r;
+        emit(PaymentPayPalSuccess());
 
       });
     });

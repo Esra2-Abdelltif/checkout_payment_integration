@@ -21,7 +21,7 @@ abstract class ApiHelper {
     CancelToken? cancelToken,
     bool isMultipart = false,
     bool isAddStripeVersion = false,
-
+    bool basicToken=false
 
   });
 
@@ -71,6 +71,7 @@ abstract class ApiHelper {
     Function? progressCallback,
     CancelToken? cancelToken,
     bool isMultipart = false,
+
   });
 }
 

@@ -15,7 +15,7 @@ void executePaypalPayment({required BuildContext context,
   required ({AmountModel amount, ItemListModel itemList,}) transctionsData}) {
   context.pushContext(route: PaypalCheckoutView(
     sandboxMode: true,
-    clientId: EnvironmentVariables.setClintIdKeyValue(),
+    clientId: EnvironmentVariables.setClintIdPayPalKeyValue(),
     secretKey: EnvironmentVariables.setSecretPayPalKeyValue(),
     transactions: [
       {

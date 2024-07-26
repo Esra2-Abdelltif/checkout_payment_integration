@@ -17,7 +17,7 @@ void main()async {
   await RegisteredSingleton.registerInstances();
 
   await EnvironmentVariables.initEnvVariables();
-  kIsWeb?(){}:Stripe.publishableKey = EnvironmentVariables.setPublishableKeyValue();
+  kIsWeb?(){}:Stripe.publishableKey = EnvironmentVariables.setPublishableStripeKeyValue();
   Bloc.observer = MyBlocObserver();
   await Locales.init(['en', 'ar']);
 

@@ -23,12 +23,12 @@ class EnvironmentVariables {
   }
 
 //fun to get secret key value from .env to use in any place in project
-  static String setSecretKeyValue() {
+  static String setSecretKeyStripeValue() {
     String res = dotenv.get(SECRET_STRIPE_KEY);
 
     return res;
   }
-  static String setPublishableKeyValue() {
+  static String setPublishableStripeKeyValue() {
     String res = dotenv.get(PUBLISHABLE_KEY);
 
     return res;
@@ -38,7 +38,7 @@ class EnvironmentVariables {
 
     return res;
   }
-  static String setClintIdKeyValue() {
+  static String setClintIdPayPalKeyValue() {
     String res = dotenv.get(CLIENT_ID);
 
     return res;
