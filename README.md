@@ -1,6 +1,6 @@
 # checkout Payment integration
 
-I show how to build a seamless checkout experience on mobile and web using Stripe and PayPal.
+I show how to build a seamless checkout experience on mobile and web using Stripe , PayMob and PayPal.
 
 ### ⚡  Flutter Stripe Payment 
 
